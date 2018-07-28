@@ -1,0 +1,11 @@
+[loadbalancer]
+rp01
+
+[webserver]
+rp[02:03]
+
+[db]
+rp04
+
+[control]
+workstation ansible_connection=local
