@@ -19,7 +19,7 @@
       file: path=/etc/nginx/sites-enabled/default state=absent
       notify: restart nginx
 
-    - name: activate the ndemo ginx site
+    - name: activate the demo nginx site
       file: >
             src=/etc/nginx/sites-available/demo
             dest=/etc/nginx/sites-enabled/demo
