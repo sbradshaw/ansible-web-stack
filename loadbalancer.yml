@@ -11,15 +11,15 @@
     - name: configure nginx site
       template: >
                 src=templates/nginx.conf.j2
-                dest=/etc/nginx/sites-available
+                dest=/etc/nginx/sites-available/demo
                 mode=0644
       notify: restart nginx
 
-    - name: deactivate the default nginx site
+    - name: deactivate default nginx site
       file: path=/etc/nginx/sites-enabled/default state=absent
       notify: restart nginx
 
-    - name: activate the demo nginx site
+    - name: activate demo nginx site
       file: >
             src=/etc/nginx/sites-available/demo
             dest=/etc/nginx/sites-enabled/demo
@@ -28,4 +28,4 @@
 
   handlers:
     - name: restart nginx
-      service: name=nginx state=restarted 
+      service: name=nginx state=restarted
