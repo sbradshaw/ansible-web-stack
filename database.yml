@@ -3,7 +3,7 @@
   become: true
   tasks:
     - name: install tools
-      apt: name= {{ item }} state=present update_cache=yes
+      apt: name={{ item }} state=present update_cache=yes
       with_items:
         - python-mysqldb
 
@@ -31,6 +31,6 @@
                   host='%'
                   state=present
 
-  handlers: 
+  handlers:
     - name: restart mysql
       service: name=mysql state=restarted
