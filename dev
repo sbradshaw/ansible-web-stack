@@ -1,3 +1,8 @@
+rp01 ansible_host=192.168.1.101
+rp02 ansible_host=192.168.1.102
+rp03 ansible_host=192.168.1.103
+rp04 ansible_host=192.168.1.104
+
 [loadbalancer]
 rp01
 
