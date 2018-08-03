@@ -20,7 +20,7 @@ def dbtest():
         db.create_all()
     except Exception as e:
         return e.message + '\n'
-    return 'Database connect from %s\n' % hostname
+    return 'Database connect %s\n' % hostname
 
 if __name__ == '__main__':
     app.run()

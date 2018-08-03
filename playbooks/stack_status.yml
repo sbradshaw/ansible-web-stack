@@ -37,6 +37,15 @@
       when: "'Response from' not in item.content"
       with_items: "{{ lb_index.results }}"
 
+    - name: verify database response
+      uri: url=http://{{ item }}/db return_content=yes
+      with_items: "{{ groups['loadbalancer'] }}"
+      register: lb_db
+
+    - fail: msg="database failed to return content"
+      when: "'Database connect' not in item.content"
+      with_items: "{{ lb_db.results }}"
+
 - hosts: loadbalancer
   tasks: 
     - name: verify backend response
@@ -47,3 +56,12 @@
     - fail: msg="index failed to return content"
       when: "'Response from {{ item.item }}' not in item.content"
       with_items: "{{ app_index.results }}"
+
+    - name: verify backend database response
+      uri: url=http://{{ item }}/db return_content=yes
+      with_items: "{{ groups['webserver'] }}"
+      register: app_db
+
+    - fail: msg="database failed to return content"
+      when: "'Database connect {{ item.item }}' not in item.content"
+      with_items: "{{ app_db.results }}"
