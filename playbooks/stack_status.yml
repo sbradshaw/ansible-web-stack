@@ -30,7 +30,7 @@
   tasks: 
     - name: verify end-to-end response
       uri: url=http://{{ item }} return_content=yes
-      with_items: "{{ groups['loadbalancer']['ansible_host'] }}"
+      with_items: "{{ groups['loadbalancer'] }}"
       register: lb_index
 
     - fail: msg="index failed to return content"
