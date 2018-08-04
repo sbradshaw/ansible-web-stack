@@ -22,8 +22,8 @@
 
 - name: setup python virtual environment
   pip: >
-        requirements=/var/www/demo/requirements.txt 
-        virtualenv=/var/www/demo/.venv
+       requirements=/var/www/demo/requirements.txt 
+       virtualenv=/var/www/demo/.venv
   notify: restart apache2
 
 - name: activate the demo apache site
