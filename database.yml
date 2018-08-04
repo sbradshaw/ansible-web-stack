@@ -3,7 +3,7 @@
   become: true
   roles:
     - {
-      role: myslq,
+      role: mysql,
       db_name: demo,
       db_user_name: demo,
       db_user_pass: demo,
