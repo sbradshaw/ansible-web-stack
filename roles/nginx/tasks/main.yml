@@ -7,7 +7,7 @@
 - name: install nginx
   apt: name=nginx state=present update_cache=yes
 
-- name: configure nginx site
+- name: configure nginx sites
   template: >
             src=nginx.conf.j2
             dest=/etc/nginx/sites-available/{{ item.key }}
@@ -19,7 +19,7 @@
   file: path=/etc/nginx/sites-enabled/default state=absent
   notify: restart nginx
 
-- name: activate nginx site
+- name: activate nginx sites
   file: >
         src=/etc/nginx/sites-available/{{ item.key }}
         dest=/etc/nginx/sites-enabled/{{ item.key }}
