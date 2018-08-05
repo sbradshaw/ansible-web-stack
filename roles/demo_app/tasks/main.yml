@@ -13,6 +13,13 @@
         mode=0755
   notify: restart apache2
 
+- name: copy demo.wsgi
+  copy: >
+        src=demo.wsgi.j2
+        dest=/var/www/demo/demo.wsgi
+        mode=0755
+  notify: restart apache2
+
 - name: copy apache2 virtual host config
   copy: >
         src=demo/demo.conf
