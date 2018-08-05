@@ -1,5 +1,5 @@
 ---
 sites:
-  demo:
+  app:
     frontend: 80
     backend: 80
