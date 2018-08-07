@@ -3,9 +3,11 @@
   apt: name={{ item }} state=present
   with_items:
     - python-httplib2
+  tags: [ 'packages' ]
 
 - name: install nginx
   apt: name=nginx state=present
+  tags: [ 'packages' ]
 
 - name: configure nginx sites
   template: >
@@ -14,16 +16,19 @@
             mode=0644
   with_dict: "{{ sites }}"
   notify: restart nginx
+  tags: [ 'configure' ]
 
 - name: get active sites
   shell: ls -1 /etc/nginx/sites-enabled
   register: active
+  tags: [ 'configure' ]
 
 - name: deactivate nginx sites
   file: path=/etc/nginx/sites-enabled/{{ item }} state=absent
   with_items: "{{ active.stdout_lines }}"
   when: item not in sites
   notify: restart nginx
+  tags: [ 'configure' ]
 
 - name: activate nginx sites
   file: >
@@ -32,6 +37,8 @@
         state=link
   with_dict: "{{ sites }}"
   notify: restart nginx
+  tags: [ 'configure' ]
 
 - name: ensure nginx started
   service: name=nginx state=started enabled=yes
+  tags: [ 'service' ]
